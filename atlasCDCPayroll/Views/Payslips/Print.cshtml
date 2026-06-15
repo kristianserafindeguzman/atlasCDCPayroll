@@ -1,0 +1,60 @@
+@model atlasCDCPayroll.Models.Payslip
+
+@{
+	Layout = null; // No layout because print dialog opens in blank window
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Print Payslip</title>
+	<style>
+		body { font-family: Tahoma, Arial, sans-serif; }
+		.mylabel { margin: 0; }
+		.print-container { width: 80%; margin: 40px auto; border: 1px solid #ccc; padding: 40px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+		.company-header { font-family: 'Monotype Corsiva', cursive, serif; font-size: 30px; color: white; background-color: black; text-align: center; padding: 10px; }
+		.city-header { font-family: Tahoma; font-size: 16px; text-align: center; margin-top: 10px; }
+		.month-header { font-family: 'Comic Sans MS', cursive, sans-serif; font-size: 15px; text-align: center; color: #333; margin-bottom: 20px;}
+		table { width: 100%; border-collapse: collapse; margin-top: 20px;}
+		td { padding: 8px; font-size: 14px; }
+		td:first-child { text-align: right; width: 40%; font-weight: bold; color: #555; }
+		td:nth-child(2) { text-align: left; padding-left: 20px; }
+		.net-salary td { font-weight: bold; font-size: 16px; border-top: 2px solid black; border-bottom: 2px solid black; }
+		.signature { text-align: center !important; font-weight: bold; margin-top: 40px; }
+	</style>
+</head>
+<body onload="window.print()">
+
+	<div class="print-container">
+		<h1 class="company-header">ATLAS CDC Payroll System</h1>
+		<h2 class="city-header">Philippines</h2>
+		<h2 class="month-header">Payslip for the Month of @Model.MonthName @Model.Year</h2>
+
+		<hr style="margin-bottom:20px;" />
+
+		<table>
+			<tr><td>Employee ID:</td><td>@Model.Employee.EmployeeId</td></tr>
+			<tr><td>Employee Name:</td><td>@Model.Employee.Name</td></tr>
+			<tr><td>Phone:</td><td>@Model.Employee.Phone</td></tr>
+			<tr><td>E-Mail:</td><td>@Model.Employee.Email</td></tr>
+			<tr><td>Designation:</td><td>@Model.Employee.Designation</td></tr>
+			<tr><td>Level:</td><td>@Model.Employee.Level</td></tr>
+			<tr><td>Generated On:</td><td>@Model.GeneratedOn.ToString("f")</td></tr>
+			<tr><td>Basic Salary:</td><td>@Model.BasicSalary.ToString("N2")</td></tr>
+			<tr><td>No. of Leaves:</td><td>@Model.NoOfLeaves</td></tr>
+			<tr><td>Deduction for Leaves:</td><td>@Model.DeductionForLeaves.ToString("N2")</td></tr>
+
+			<tr class="net-salary">
+				<td>Net Salary</td>
+				<td style="color: #2E7D32;">P @Model.NetSalary.ToString("N2")</td>
+			</tr>
+
+			<tr>
+				<td></td>
+				<td class="signature"><br /><br />_________________________<br />Signature of the<br />Payroll Manager</td>
+			</tr>
+		</table>
+	</div>
+
+</body>
+</html>
