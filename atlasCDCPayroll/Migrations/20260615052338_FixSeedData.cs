@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace atlasCDCPayroll.Migrations
 {
     /// <inheritdoc />
-    public partial class SqliteInitialCreate : Migration
+    public partial class FixSeedData : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -57,6 +57,16 @@ namespace atlasCDCPayroll.Migrations
                         principalColumn: "EmployeeId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Employees",
+                columns: new[] { "EmployeeId", "Designation", "Email", "Level", "Name", "Password", "Phone", "Username" },
+                values: new object[] { 101, "Staff", "ram@company.com", "1", "Ram Employee", "ram123", "555-0192", "ram" });
+
+            migrationBuilder.InsertData(
+                table: "Payslips",
+                columns: new[] { "PayslipId", "BasicSalary", "DeductionForLeaves", "EmployeeId", "GeneratedOn", "Month", "MonthName", "NetSalary", "NoOfLeaves", "SalaryPerDay", "Year" },
+                values: new object[] { 1, 50000m, 0m, 101, new DateTime(2026, 6, 15, 12, 0, 0, 0, DateTimeKind.Unspecified), 6, "June", 50000m, 0, 1666.67m, 2026 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Payslips_EmployeeId",

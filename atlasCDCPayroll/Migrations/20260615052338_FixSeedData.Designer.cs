@@ -11,8 +11,8 @@ using atlasCDCPayroll.Data;
 namespace atlasCDCPayroll.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260615045435_SqliteInitialCreate")]
-    partial class SqliteInitialCreate
+    [Migration("20260615052338_FixSeedData")]
+    partial class FixSeedData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,6 +57,19 @@ namespace atlasCDCPayroll.Migrations
                     b.HasKey("EmployeeId");
 
                     b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            EmployeeId = 101,
+                            Designation = "Staff",
+                            Email = "ram@company.com",
+                            Level = "1",
+                            Name = "Ram Employee",
+                            Password = "ram123",
+                            Phone = "555-0192",
+                            Username = "ram"
+                        });
                 });
 
             modelBuilder.Entity("atlasCDCPayroll.Models.Payslip", b =>
@@ -101,6 +114,22 @@ namespace atlasCDCPayroll.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.ToTable("Payslips");
+
+                    b.HasData(
+                        new
+                        {
+                            PayslipId = 1,
+                            BasicSalary = 50000m,
+                            DeductionForLeaves = 0m,
+                            EmployeeId = 101,
+                            GeneratedOn = new DateTime(2026, 6, 15, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            Month = 6,
+                            MonthName = "June",
+                            NetSalary = 50000m,
+                            NoOfLeaves = 0,
+                            SalaryPerDay = 1666.67m,
+                            Year = 2026
+                        });
                 });
 
             modelBuilder.Entity("atlasCDCPayroll.Models.Payslip", b =>
