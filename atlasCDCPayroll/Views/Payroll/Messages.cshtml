@@ -1,0 +1,17 @@
+﻿@model IEnumerable<atlasCDCPayroll.Models.MessageModel>
+@{
+    Layout = "_Layout";
+}
+<div class="card p-4 border-0 shadow-sm" style="border-radius:15px; background-color: white;">
+    <h2 class="fw-bold mb-2" style="color: #2b7a37;">Messages</h2>
+    <div class="mb-4"><a asp-controller="Payroll" asp-action="Compose" class="text-warning fw-bold text-decoration-none me-3">Compose</a><a href="#" class="text-warning fw-bold text-decoration-none">Outbox</a></div>
+    <table class="table table-hover">
+        <thead style="background-color:#2b7a37; color:white;"><tr><th>ID</th><th>Date and Time</th><th>From</th><th>Message</th><th>Actions</th></tr></thead>
+        <tbody>
+            @foreach (var m in Model)
+            {
+                <tr><td>@m.MessageID</td><td>@m.DateTimeSent.ToString("G")</td><td>@m.SenderName</td><td>@m.MessageText</td><td><span class="text-decoration-underline text-muted">Reply</span></td></tr>
+            }
+        </tbody>
+    </table>
+</div>

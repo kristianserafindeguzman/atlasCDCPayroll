@@ -1,0 +1,49 @@
+﻿@model atlasCDCPayroll.Models.Payslip
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Print Employee Payslip</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+            body {
+                background-color: #525659;
+                padding: 30px 0;
+            }
+
+            .sheet {
+                background-color: white;
+                max-width: 700px;
+                margin: 0 auto;
+                padding: 40px;
+                border-radius: 4px;
+            }
+
+            .line {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px 0;
+                border-bottom: 1px solid #eee;
+            }
+    </style>
+</head>
+<body>
+    <div class="sheet shadow">
+        <div><span class="text-muted" style="font-size:10px;">...</span><h1 class="fw-bold m-0 text-success">ATLAS CDC</h1><p class="text-muted m-0 small">Payroll Management System</p></div>
+        <hr style="border-top: 2px solid #2b7a37; opacity:1;" />
+        <h3 class="fw-bold text-warning mb-4">Employee Payslip</h3>
+        <div class="line"><strong>Employee Name</strong><span>@Model.EmployeeName</span></div>
+        <div class="line"><strong>Month and Year</strong><span>@Model.MonthAndYear</span></div>
+        <div class="line"><strong>Generated On</strong><span>@Model.GeneratedOn</span></div>
+        <div class="line"><strong>Basic Salary</strong><span>@Model.BasicSalary</span></div>
+        <div class="line"><strong>Number of Leaves</strong><span>@Model.Leaves</span></div>
+        <div class="line"><strong>Salary Per Day</strong><span>@Model.SalaryPerDay</span></div>
+        <div class="line"><strong>Deduction For Leaves</strong><span>@Model.Deductions</span></div>
+        <div class="line" style="border:none;"><strong>Net Salary</strong><span class="fw-bold">@Model.NetSalary</span></div>
+        <button class="btn btn-success mt-4" onclick="window.print();">Print Payslip</button><span class="text-muted small ms-1">...</span>
+    </div>
+</body>
+</html>

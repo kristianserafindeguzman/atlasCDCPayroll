@@ -1,58 +1,56 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = null;
+    var userRole = Context.Session.GetString("UserRole");
+    var userName = Context.Session.GetString("Username");
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Payroll Management System</title>
-    <script type="importmap"></script>
+    <title>ATLAS CDC Payroll System</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/atlasCDCPayroll.styles.css" asp-append-version="true" />
 </head>
-<body>
-    <div class="top-header">
-        <div>
-            <div class="brand-title">ATLAS CDC</div>
-            <div class="brand-subtitle">Payroll Management System</div>
-        </div>
+<body style="background-color: #f8f9fa;">
+
+    <div style="background: linear-gradient(to right, #4c7e2b 0%, #4c7e2b 50%, #ff9900 100%); padding: 20px; color: white;">
+        <h2 class="m-0 fw-bold" style="font-family: sans-serif;">ATLAS CDC</h2>
+        <p class="m-0" style="font-size: 14px;">Payroll Management System</p>
     </div>
 
-    @if (User.Identity != null && User.Identity.IsAuthenticated)
-    {
-        <div class="menu-panel">
-            <ul class="menu-items">
-                <li><a asp-controller="Home" asp-action="Index" class="@(ViewContext.RouteData.Values["Controller"]?.ToString() == "Home" ? "active" : "")">Home</a></li>
+    <div class="container mt-3">
+        @if (!string.IsNullOrEmpty(userRole))
+        {
+            <div class="p-2 mb-4 rounded" style="background-color: #2b7a37;">
+                <ul class="nav">
+                    <li class="nav-item"><a class="nav-link text-white px-3" asp-controller="Payroll" asp-action="Dashboard">Home</a></li>
 
-                @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
-                {
-                    <li><a asp-controller="Employees" asp-action="Index" class="@(ViewContext.RouteData.Values["Controller"]?.ToString() == "Employees" ? "active" : "")">Employees</a></li>
-                }
+                    @if (userRole == "Admin")
+                    {
+                        <li class="nav-item"><a class="nav-link text-white px-3" asp-controller="Employee" asp-action="Index">Employees</a></li>
+                    }
+                    else if (userRole == "Manager")
+                    {
+                        <li class="nav-item"><a class="nav-link text-white px-3" asp-controller="Employee" asp-action="Index">Employees</a></li>
+                        <li class="nav-item"><a class="nav-link text-white px-3" asp-controller="Payroll" asp-action="Messages">Messages</a></li>
+                        <li class="nav-item"><a class="nav-link text-white px-3" asp-controller="Payroll" asp-action="Payslips">Payslips</a></li>
+                    }
+                    else if (userRole == "Employee")
+                    {
+                        <li class="nav-item"><a class="nav-link text-white px-3" asp-controller="Payroll" asp-action="Messages">Messages</a></li>
+                        <li class="nav-item"><a class="nav-link text-white px-3" asp-controller="Payroll" asp-action="PersonalPayslips">Payslips</a></li>
+                    }
 
-                @if (User.IsInRole("Employee"))
-                {
-                    <li><a asp-controller="Payslips" asp-action="MyPayslips" class="@(ViewContext.RouteData.Values["Controller"]?.ToString() == "Payslips" ? "active" : "")">My Payslips</a></li>
-                }
-
-                <li><a asp-controller="Account" asp-action="Logout">Log Out</a></li>
-            </ul>
-            <div class="logged-in-as">Logged in as @User.Identity.Name</div>
-        </div>
-    }
-
-    <div class="page-content-wrapper">
+                    <li class="nav-item ms-auto"><a class="nav-link text-white px-3" asp-controller="Auth" asp-action="Logout">Log Out</a></li>
+                </ul>
+            </div>
+        }
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted mt-5">
-        <div class="container text-center">
-            &copy; 2026 - ATLAS CDC Payroll System
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

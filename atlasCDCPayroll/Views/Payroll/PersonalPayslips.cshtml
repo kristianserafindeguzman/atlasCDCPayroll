@@ -1,0 +1,17 @@
+﻿@model IEnumerable<atlasCDCPayroll.Models.Payslip>
+@{
+    Layout = "_Layout";
+}
+<div class="card p-4 border-0 shadow-sm" style="border-radius: 15px; background-color: white;">
+    <h2 class="fw-bold mb-1" style="color: #2b7a37;">Payroll Records</h2>
+    <h5 class="fw-bold mb-4" style="color: #000066;">Employee: @Context.Session.GetString("Username")</h5>
+    <table class="table table-striped align-middle">
+        <thead style="background-color: #2b7a37; color: white;"><tr><th>Payslip ID</th><th>Month and Year</th><th>Generated On</th><th>Basic Salary</th><th>Leaves</th><th>Salary / Day</th><th>Deductions</th><th>Net Salary</th><th class="text-center">Action</th></tr></thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr><td>@item.PayslipID</td><td>@item.MonthAndYear</td><td>@item.GeneratedOn.ToString("G")</td><td>@item.BasicSalary</td><td>@item.Leaves</td><td>@item.SalaryPerDay</td><td>@item.Deductions</td><td class="fw-bold">@item.NetSalary</td><td class="text-center"><a href="@Url.Action("PrintPayslip", "Payroll", new { id = item.PayslipID })" target="_blank" class="text-dark text-decoration-underline" onclick="window.open(this.href,'targetWindow','width=800,height=600'); return false;">Print</a></td></tr>
+            }
+        </tbody>
+    </table>
+</div>

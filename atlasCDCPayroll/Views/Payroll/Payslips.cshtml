@@ -1,0 +1,31 @@
+﻿@model IEnumerable<atlasCDCPayroll.Models.Payslip>
+@{
+    Layout = "_Layout";
+}
+<div class="card p-4 border-0 shadow-sm" style="border-radius:15px; background-color: white;">
+    <h2 class="fw-bold mb-1" style="color: #2b7a37;">Payroll Management</h2>
+    <p class="text-muted mb-4">View and manage employee payroll records.</p>
+    <form asp-controller="Payroll" asp-action="GetEmployeePayslips" method="post" class="row align-items-center mb-4">
+        <div class="col-auto"><label class="fw-bold">Employee</label></div>
+        <div class="col-sm-3"><select name="employeeName" class="form-select form-select-sm" onchange="this.form.submit()"><option value="">---Select---</option>@foreach(var name in ViewBag.Employees){
+            <option value="@name" selected="@(name == ViewBag.SelectedEmployee)">@name</option>
+        }
+    </select></div>
+    @if (!string.IsNullOrEmpty(ViewBag.SelectedEmployee))
+    {
+        <div class="col-auto"><a asp-controller="Payroll" asp-action="GeneratePayslipForm" asp-route-name="@ViewBag.SelectedEmployee" class="text-warning fw-bold text-decoration-none">Generate Payslip</a></div>
+    }
+</form>
+@if (Model.Any())
+{
+    <table class="table table-striped align-middle">
+        <thead style="background-color:#2b7a37; color:white;"><tr><th>Payslip ID</th><th>Month and Year</th><th>Generated On</th><th>Basic Salary</th><th>Leaves</th><th>Salary / Day</th><th>Deductions</th><th>Net Salary</th><th>Actions</th></tr></thead>
+        <tbody>
+            @foreach (var p in Model)
+            {
+                <tr><td>@p.PayslipID</td><td>@p.MonthAndYear</td><td>@p.GeneratedOn.ToString("G")</td><td>@p.BasicSalary</td><td>@p.Leaves</td><td>@p.SalaryPerDay</td><td>@p.Deductions</td><td class="fw-bold text-success">@p.NetSalary</td><td><a href="@Url.Action("PrintPayslip", "Payroll", new { id = p.PayslipID })" target="_blank" class="text-dark">Print</a></td></tr>
+            }
+        </tbody>
+    </table>
+}
+</div>

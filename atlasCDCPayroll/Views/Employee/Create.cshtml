@@ -1,0 +1,18 @@
+﻿@model atlasCDCPayroll.Models.Employee
+@{
+    Layout = "_Layout";
+}
+<div class="card p-5 border-0 shadow-sm" style="border-radius: 15px; max-width: 600px; background-color: white;">
+    <h2 class="fw-bold mb-4" style="color: #2b7a37;">Add New Employee</h2>
+    <form asp-controller="Employee" asp-action="Create" method="post">
+        <div class="row mb-3"><label class="col-sm-4 fw-bold">Employee ID</label><div class="col-sm-8 text-warning fw-bold">@ViewBag.NextID</div></div>
+        <div class="row mb-3"><label class="col-sm-4 fw-bold">Name</label><div class="col-sm-8"><input asp-for="Name" class="form-control form-control-sm rounded-0 border-dark" /><span asp-validation-for="Name" class="text-danger small"></span></div></div>
+        <div class="row mb-3"><label class="col-sm-4 fw-bold">Phone</label><div class="col-sm-8"><input asp-for="Phone" class="form-control form-control-sm rounded-0" /><span asp-validation-for="Phone" class="text-danger small"></span></div></div>
+        <div class="row mb-3"><label class="col-sm-4 fw-bold">E-Mail</label><div class="col-sm-8"><input asp-for="Email" type="email" class="form-control form-control-sm rounded-0" /><span asp-validation-for="Email" class="text-danger small"></span></div></div>
+        <div class="row mb-3"><label class="col-sm-4 fw-bold">Designation</label><div class="col-sm-8"><input asp-for="Designation" class="form-control form-control-sm rounded-0" /><span asp-validation-for="Designation" class="text-danger small"></span></div></div>
+        <div class="row mb-3"><label class="col-sm-4 fw-bold">Level</label><div class="col-sm-4"><select asp-for="Level" class="form-select form-select-sm rounded-0"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></div></div>
+        <div class="row mb-3"><label class="col-sm-4 fw-bold">Username</label><div class="col-sm-8"><input asp-for="Username" class="form-control form-control-sm rounded-0" /><span asp-validation-for="Username" class="text-danger small"></span></div></div>
+        <div class="row mb-4"><label class="col-sm-4 fw-bold">Password</label><div class="col-sm-8"><input asp-for="Password" class="form-control form-control-sm rounded-0" /><span asp-validation-for="Password" class="text-danger small"></span></div></div>
+        <button type="submit" class="btn text-white px-4" style="background-color: #2b7a37;">Create Employee</button>
+    </form>
+</div>
