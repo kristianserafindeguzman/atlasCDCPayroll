@@ -1,0 +1,39 @@
+@model IEnumerable<atlasCDCPayroll.Models.Employee>
+
+@{
+	ViewData["Title"] = "Employees";
+}
+
+<h1>Employees</h1>
+
+<p>
+	<a asp-action="Create" class="btn btn-primary">Create New Employee</a>
+</p>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>@Html.DisplayNameFor(model => model.Name)</th>
+			<th>@Html.DisplayNameFor(model => model.Phone)</th>
+			<th>@Html.DisplayNameFor(model => model.Email)</th>
+			<th>@Html.DisplayNameFor(model => model.Designation)</th>
+			<th>@Html.DisplayNameFor(model => model.Level)</th>
+			<th>@Html.DisplayNameFor(model => model.Username)</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+@foreach (var item in Model) {
+		<tr>
+			<td>@Html.DisplayFor(modelItem => item.Name)</td>
+			<td>@Html.DisplayFor(modelItem => item.Phone)</td>
+			<td>@Html.DisplayFor(modelItem => item.Email)</td>
+			<td>@Html.DisplayFor(modelItem => item.Designation)</td>
+			<td>@Html.DisplayFor(modelItem => item.Level)</td>
+			<td>@Html.DisplayFor(modelItem => item.Username)</td>
+			<td>
+				<!-- Add Edit/Delete links here as needed -->
+			</td>
+		</tr>
+}
+	</tbody>
+</table>

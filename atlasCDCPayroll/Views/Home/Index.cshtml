@@ -1,8 +1,13 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Welcome";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center" style="margin-top: 50px;">
+    <h1 style="color: #2E7D32; font-family: 'Segoe UI'; font-weight: bold;">Welcome to ATLAS CDC Payroll System</h1>
+    <p style="font-family: 'Segoe UI'; font-size: 16px; margin-top: 20px;">
+        You are successfully logged in as <strong>@User.Identity.Name</strong>.
+    </p>
+    <p style="font-family: 'Segoe UI'; color: #666;">
+        Use the navigation menu above to access your features.
+    </p>
 </div>
